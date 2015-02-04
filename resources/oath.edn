@@ -1,0 +1,65 @@
+;;https://literalminded.wordpress.com/2013/01/20/lets-diagram-the-oath-of-office/
+
+[:clause
+ [:np [:pron "I"]]
+ [:vp
+  [:aux "do"]
+  [:vp
+   [:adv "solemnly"]
+   [:vp [:v [:v "swear"] [:conj "or"] [:v "affirm"]]]
+   [:clause
+    [:comp "that"]
+    [:clause
+     [:vp
+      [:vp
+       [:aux "will"]
+       [:vp
+        [:adv "faithfully"]
+        [:vp
+         [:v "execute"]
+         [:np
+          [:det "the"]
+          [:nom
+           [:n "Office"]
+           [:pp
+            [:p "of"]
+            [:np
+             [:n "President"]
+             [:pp
+              [:p "of"]
+              [:np
+               [:det "the"]
+               [:nom
+                [:adj "United"]
+                [:n "States"]]]]]]]]]]]
+      [:conj "and"]
+      [:vp
+       [:aux "will"]
+       [:vp
+        [:pp
+         [:p "to"]
+         [:np
+          [:det "the"]
+          [:nom
+           "best" ;;wtf
+           [:pp
+            [:p "of"]
+            [:np
+             [:det "my"]
+             [:n "ability"]]]]]]
+        [:vp
+         [:v
+          [:v "preserve"]
+          [:v "protect"]
+          [:conj "and"]
+          [:v "defend"]]
+         [:np
+          [:det "the"]
+          [:nom [:n "Constitution"]]
+          [:pp
+           [:p "of"]
+           [:np
+            [:det "the"]
+            [:nom
+             [:adj "United"]
+             [:n "States"]]]]]]]]]]]]]]
