@@ -1,0 +1,9 @@
+[:v
+ [:n "John"]
+ "hit"
+ [:n [:d "the"] "ball"]]
+
+[:v
+ [:n [:d "the"] "conventions"]
+ "can"
+ [:v "vary"]]
