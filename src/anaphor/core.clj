@@ -1,20 +1,19 @@
 (ns anaphor.core
-  (:refer-clojure :exclude [and or])
   (:require [clojure.walk :as walk]
-            [clojure.core.match :refer [match]]))
-
-(defn render [clause]
-  (clojure.string/join " " (filter string? (flatten clause))))
+            [clojure.zip :as zip]
+            [clojure.core.match :refer [match]]
+            [anaphor.utils :as utils]
+            [anaphor.render :refer [render]]))
 
 ;;conjunction phrases
-(defn and [node]
+(defn and-conj [node]
   (match node
-   [:andx parts] [:conjp {:conj "and"} parts]
+   [:and parts] [:conjp {:conj "and"} parts]
    :else node))
 
-(defn or [node]
+(defn or-conj [node]
   (match node
-   [:and parts] [:conjp {:conj "or"} parts]
+   [:or parts] [:conjp {:conj "or"} parts]
    :else node))
 
 ;;pp prepositional phrases
@@ -24,25 +23,30 @@
    [:pp p np]           [:pp' [:p p] (vec (concat [:np] np))] ;;it's a list
    :else node))
 
-(defn advp [node]
-  (match node
-   [:advp adv [:vp & rest]] [:vp [:adv adv] (vec (concat [:vp] rest))] ;;it's a vp
-   [:advp adv vp]           [:vp [:adv adv] (vec (concat [:vp] vp))] ;;it's a list
-   :else node))
-
 ;;add support for attribute map
 (defn the [node]
   (match
    node
    [:the n]            [:np [:det "the"] [:n n]]
-   [:the n [:pp' pp]]  [:np [:det "the"] [:nom [:n n] [:pp pp]]]
+   [:the n [:pp' pp]]  [:np [:det "the"] [:nom [:n n] [:pp' pp]]]
    [:the [:adj adj] n] [:np [:det "the"] [:nom [:adj adj] [:n n]]]
    :else node))
 
-(def rules [the pp advp and or])
+(def rules [the pp and-conj or-conj])
 
 (defn produce [tree]
   (walk/postwalk (apply comp rules) tree))
+
+(defn is-class? [node c]
+  (and (vector? node) (= c (first node))))
+
+(defn remove-class [tree c]
+  (utils/edit-tree
+   (fn [tree node]
+     (if (is-class? node c)
+       (zip/remove tree)
+       tree))
+   tree))
 
 (comment
   (produce [:pp "of"

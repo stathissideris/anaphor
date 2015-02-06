@@ -1,37 +1,41 @@
 ;;https://literalminded.wordpress.com/2013/01/20/lets-diagram-the-oath-of-office/
 
-[:clause
- [:np [:pron "I"]]
- [:vp
-  [:aux "do"]
-  [:advp
-   "solemnly"
-   [(or [[:v "swear"] [:v "affirm"]])
-    [:clause
-     [:comp "that"]
+(def tree
+ [:clause
+  [:np [:pron "I"]]
+  [:vp
+   [:aux "do"]
+   [:vp
+    [:adv "solemnly"]
+    [:vp
+     [:or [[:v "swear"] [:v "affirm"]]]
      [:clause
-      (and
-       [[:vp
-         [:aux "will"]
-         [:advp "faithfully"
-          [[:v "execute"]
-           [:the "Office" [:pp "of"
-                           [:n "President"]
-                           [:pp "of" [:the [:adj "United"] "States"]]]]]]]
-        [:vp
-         [:aux "will"]
-         [:vp
-          [:pp "to"
-           [[:det "the"]
-            [:nom
-             "best" ;;wtf
-             [:pp
-              "of"
-              [[:det "my"] [:n "ability"]]]]]]
+      [:comp "that"]
+      [:clause
+       [:and
+        [[:vp
+          [:aux "will"]
           [:vp
-           [:v
-            (and
-             [[:v "preserve"]
-              [:v "protect"]
-              [:v "defend"]])]
-           [:the [:n "Constitution"] [:pp "of" [:the [:adj "United"] "States"]]]]]]])]]]]]]
+           [:adv "faithfully"]
+           [:vp
+            [:v "execute"]
+            [:the "Office" [:pp "of"
+                            [:n "President"]
+                            [:pp "of" [:the [:adj "United"] "States"]]]]]]]
+         [:vp
+          [:aux "will"]
+          [:vp
+           [:pp "to"
+            [[:det "the"]
+             [:nom
+              "best" ;;wtf
+              [:pp
+               "of"
+               [[:det "my"] [:n "ability"]]]]]]
+           [:vp
+            [:v
+             [:and
+              [[:v "preserve"]
+               [:v "protect"]
+               [:v "defend"]]]]
+            [:the [:n "Constitution"] [:pp "of" [:the [:adj "United"] "States"]]]]]]]]]]]]]])
